@@ -1,8 +1,18 @@
 # LLM Gateway
 
-A lightweight multi-model inference gateway in Go.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Go Version](https://img.shields.io/badge/Go-1.26+-00ADD8?logo=go)](go.mod)
 
-It supports model/version registration, hot updates, SSE token streaming, per-version concurrency limits, and Prometheus metrics.
+A production-minded, lightweight multi-model inference gateway written in Go.
+
+LLM Gateway focuses on API stability and operational safety: model/version registration at runtime, SSE streaming, hot updates without interrupting in-flight requests, per-version concurrency controls, and Prometheus metrics.
+
+## Why This Project
+
+- Keep inference access behind one stable API.
+- Roll out model/version updates safely while traffic is running.
+- Observe throughput and latency with Prometheus-ready metrics.
+- Start local in minutes with a built-in `mock` backend.
 
 ## Features
 
@@ -10,7 +20,7 @@ It supports model/version registration, hot updates, SSE token streaming, per-ve
 - Stream inference output over SSE (`POST /infer`).
 - Hot-update model version configs without breaking in-flight requests.
 - Enforce per-version concurrency limits with `429` responses.
-- Integrate multiple backends (`mock`, `openai`; `ollama` placeholder).
+- Integrate multiple backends (`mock`, `openai`; `ollama` is reserved as a placeholder).
 - Export metrics at `/metrics`.
 
 ## Tech Stack
@@ -137,6 +147,12 @@ curl http://localhost:8080/health
 curl http://localhost:8080/metrics
 ```
 
+## Run Tests
+
+```bash
+go test ./...
+```
+
 ## Metrics
 
 - `llm_gateway_infer_total` (counter: model/version/status)
@@ -158,3 +174,13 @@ This repository includes:
 - English-only docs and code comments/messages.
 - AI agent guidance (`CLAUDE.md`, `AGENTS.md`, `.ai/`).
 - Basic open-source hygiene (`.gitignore`, `LICENSE`).
+
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+By participating, you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Security
+
+Please report vulnerabilities responsibly as described in [SECURITY.md](SECURITY.md).
